@@ -16,10 +16,7 @@ using namespace std;
 class Plane {
 public:
     Plane(string icao24);
-    Plane(const Plane& orig);
-    virtual ~Plane();
-    void SetAddress(string address);
-    string GetAddress() const;
+    string getAddress();
 private:
     string address;
 };

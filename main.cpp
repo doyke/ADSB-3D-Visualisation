@@ -9,7 +9,7 @@
 #include <iostream>
 #include <vector>
 #include "Message.h"
-
+#include <QCoreApplication>
 using namespace std;
 
 const int ICAO24_POS = 4;
@@ -21,9 +21,12 @@ int findNthChar(int n, char x, string s);
 string getmessageItem(int n, string msg);
 void parseLine(string line);
 
-vector<Message> messagelist;
+vector<Message>* messagelist=new vector<Message>();
 
-int main(int argc, char** argv) {
+int main(int argc, char *argv[])
+{
+    QCoreApplication a(argc, argv);
+
     cout<<"hello"<<endl;
     string msg1 = "MSG,3,111,11111,4CA9D4,111111,2015/04/07,09:04:36.153,2015/04/07,09:04:36.166,,37000,,,52.76319,11.56484,,,,,,0";
     string msg2 = "MSG,3,111,11111,4407C1,111111,2015/04/07,09:04:36.161,2015/04/07,09:04:36.171,,20025,,,52.20845,10.16121,,,,,,0";
@@ -32,11 +35,11 @@ int main(int argc, char** argv) {
     parseLine(msg2);
     parseLine(msg3);
     
-    for (int i = 0; i < messagelist.size(); i++) {
-        cout<<messagelist.at(i).getAddress()<<endl;
+    for (int i = 0; i < messagelist->size(); i++) {
+        cout<<messagelist->at(i).getAddress()<<endl;
     }
 
-    return 0;
+    return a.exec();
 }
 
 void parseLine(string line){
@@ -47,7 +50,7 @@ void parseLine(string line){
     string lon = getmessageItem(LONGITUDE_POS,line);
     
     if(icao24.size() !=0 && alt.size() != 0 && lat.size() !=0 && lon.size() != 0){
-        messagelist.push_back(Message(icao24,lat,lon,alt));
+        messagelist->push_back(Message(icao24,lat,lon,alt));
     }
 }
 int findNthChar(int n, char x, string s){

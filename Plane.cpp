@@ -14,7 +14,7 @@ Plane::Plane(string icao24) {
     this->address = icao24;
 }
 
-string Plane::GetAddress() {
+string Plane::getAddress() {
     return address;
 }
 
