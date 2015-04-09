@@ -17,4 +17,9 @@ Plane::Plane(string icao24) {
 string Plane::getAddress() {
     return address;
 }
+vector<string> Plane::getCoordinates()
+{
+    return coordinates;
+}
+
 
