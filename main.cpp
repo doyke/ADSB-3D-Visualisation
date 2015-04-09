@@ -7,7 +7,7 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <QVector>
+#include <vector>
 #include "Message.h"
 #include <QCoreApplication>
 using namespace std;
@@ -21,7 +21,7 @@ int findNthChar(int n, char x, string s);
 string getmessageItem(int n, string msg);
 void parseLine(string line);
 
-QVector<Message> messagelist;//=new QVector<Message>();
+vector<Message>* messagelist=new vector<Message>();
 
 int main(int argc, char *argv[])
 {
@@ -35,8 +35,8 @@ int main(int argc, char *argv[])
     parseLine(msg2);
     parseLine(msg3);
     
-    for (int i = 0; i < messagelist.size(); i++) {
-        cout<<messagelist[i].getAddress()<<endl;
+    for (int i = 0; i < messagelist->size(); i++) {
+        cout<<messagelist->at(i).getAddress()<<endl;
     }
 
     return a.exec();
@@ -50,7 +50,7 @@ void parseLine(string line){
     string lon = getmessageItem(LONGITUDE_POS,line);
     
     if(icao24.size() !=0 && alt.size() != 0 && lat.size() !=0 && lon.size() != 0){
-        messagelist.push_back(Message(icao24,lat,lon,alt));
+        messagelist->push_back(Message(icao24,lat,lon,alt));
     }
 }
 int findNthChar(int n, char x, string s){
